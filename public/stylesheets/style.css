@@ -1,11 +1,14 @@
 *                    { margin: 0; padding: 0; }
-body                 { font: 16px Georgia, serif; }
+body                 { font: 16px Tahoma, serif; }
 
-#page-wrap           { margin: 2% auto; color: white; }
+#page-wrap           { margin: 0px; color: white; }
 #page-wrap > .main   { border: 1px solid #999; padding: 1%;
-	                   margin-bottom: 1px; color: black;}
+	                   margin-bottom: 1px; color: black; height: 100%}
 
 section > div        { padding: 20px; }
-header, nav, section { background: #eee; text-align: center;}
-footer               { background: #eee; text-align: center;}
-nav span             { margin: 0px 10px 0px 0px;}
+header, nav, section { background: #BDBBBB; text-align: center;}
+footer               { background: #BDBBBB; text-align: center;}
+nav span             { margin: 0px 10px 0px 0px; padding: 5px; }
+span:hover					 { background-color: white; text: #6f5499; border-radius: 5px; }
+a									   { text-decoration: none; font-weight: bold; }
+img 								 { max-width: 100%; height: auto; width: auto; margin: 0px 0px 20px 0px; }

@@ -1,7 +1,12 @@
 body             { background: #333; }
 
-#page-wrap:after { content: "Smartphone Layout"; }
+//#page-wrap:after { content: "Layout de Smartphone"; }
 
-h2 span, section h3 { display: none; }
-body             { font-size: xx-large; }
+h2 span, section h3 { display: none;}
+body             { font-size: x-large; }
 footer, input    { font-size: large; }
+section h3       { display: block; }
+a                { font-size: large; padding: 5px;}
+span             { margin: 5px; }
+footer a         { display: block; }
+input[type=submit] {display: block; width: 100%; padding: 10px; margin-top: 5px; }
