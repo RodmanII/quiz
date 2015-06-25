@@ -6,6 +6,7 @@ var pwd = (url[3]||null);
 var protocol = (url[1]||null);
 var dialect = (url[1]||null);
 var port = (url[5]||null);
+var host = (url[4]||null);
 var storage = process.env.DATABASE_STORAGE;
 
 var Sequelize = require('sequelize');
