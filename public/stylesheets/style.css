@@ -12,3 +12,4 @@ nav span             { margin: 0px 10px 0px 0px; padding: 5px; }
 span:hover					 { background-color: white; text: #6f5499; border-radius: 5px; }
 a									   { text-decoration: none; font-weight: bold; }
 img 								 { max-width: 100%; height: auto; width: auto; margin: 0px 0px 20px 0px; }
+ul									 { text-align: left; margin-left: 15px;	}
