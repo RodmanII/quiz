@@ -11,10 +11,20 @@ exports.load = function(req,res,next,quizId){
   }).catch(function(error){next(error);});
 };
 
-exports.index = function(req,res){
-  models.Quiz.findAll().then(function(quizes){
-    res.render('quizes/index.ejs',{quizes:quizes});
-  })
+exports.index = function(req,res,next){
+  if(typeof req.query.search!=="undefined"){
+    models.Quiz.findAll({where:['LOWER(pregunta) like LOWER(?)', '%' + req.query.search.replace(/ /g,"%") + '%'],order:'pregunta ASC'}).then(function(quizes){
+      if(quizes.length>0){
+        res.render('quizes/index.ejs',{quizes:quizes});
+      }else{
+        res.render('quizes/sinresultados.ejs');
+      }
+    }).catch(function(error){next(error);});
+  }else{
+    models.Quiz.findAll().then(function(quizes){
+      res.render('quizes/index.ejs',{quizes:quizes});
+    });
+  }
 };
 
 exports.show = function(req,res){
