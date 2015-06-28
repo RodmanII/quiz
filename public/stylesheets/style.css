@@ -9,7 +9,15 @@ section > div        { padding: 20px; }
 header, nav, section { background: #BDBBBB; text-align: center;}
 footer               { background: #BDBBBB; text-align: center;}
 nav span             { margin: 0px 10px 0px 0px; padding: 5px; }
-span:hover					 { background-color: white; text: #6f5499; border-radius: 5px; }
+section span				 { text-align: center; }
+#ErrorMsgs					 { color: #FD0303; font-weight: bold; }
+nav span:hover			 { background-color: white; text: #6f5499; border-radius: 5px; }
 a									   { text-decoration: none; font-weight: bold; }
 img 								 { max-width: 100%; height: auto; width: auto; margin: 0px 0px 20px 0px; }
-ul									 { text-align: left; margin-left: 15px;	}
+ol									 { text-align: left; margin-left: 15px;	}
+li form							 { display: inline; }
+#rinco							 { color: #e51212; font-weight: bold; }
+#rcorr							 { color: #23991D; font-weight: bold; }
+table							   { margin: auto; }
+td									 { text-align: left; }
+td[colspan='2']			 { text-align: center; }
