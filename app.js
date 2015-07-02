@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var app = express();
@@ -20,9 +21,41 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieParser('Quiz 23610'));
+app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Helpers dinámicos
+app.use(function(req,res,next){
+  //Guardar path en session.redir para despues de login
+  if(!req.path.match(/\/login|\/logout/)){
+    req.session.redir = req.path;
+  }
+
+  //Hacer visible req.session en la vistas
+  res.locals.session = req.session;
+  next();
+});
+
+app.all('*',function(req,res,next){
+  if(req.session.user){
+    var instante = Date.now();
+    req.session.utr = req.session.utr || instante;
+    var tiempo = ((instante - req.session.utr) * 0.001)/60;
+    console.log('Tiempo en minutos:' + Math.round(tiempo*100)/100);
+    if(tiempo>2){
+      console.log('Han pasado mas de dos minutos, redirecciono');
+      delete req.session.user;
+      delete req.session.utr;
+      res.redirect('/login');
+      return;
+    }else{
+      req.session.utr = instante;
+    }
+  }
+  next();
+});
 
 app.use('/', routes);
 
@@ -58,6 +91,7 @@ app.use(function(err, req, res, next) {
     errors:[]
   });
 });
+
 
 
 module.exports = app;

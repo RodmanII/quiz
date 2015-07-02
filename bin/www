@@ -6,7 +6,13 @@
 
 var app = require('../app');
 var debug = require('debug')('quiz:server');
-var http = require('http');
+var fs = require('fs');
+var https = require('https');
+
+var options = {
+  key: fs.readFileSync('certs/quiz-2015-key.pem').toString(),
+  cert: fs.readFileSync('certs/quiz-2015-cert.pem').toString()
+}
 
 /**
  * Get port from environment and store in Express.
@@ -18,16 +24,22 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
+var server = app.listen(app.get('port'), function() {
+  debug('Servidor express escuchando en el puerto ' + server.address().port);
+});
 
-var server = http.createServer(app);
-
+//var server = http.createServer(app);
+var serverSecure = https.createServer(options,app);
+serverSecure.listen(8443, function(){
+  debug('Servidor express escuchando en el puerto ' + serverSecure.address().port);
+});
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+serverSecure.listen(port);
+serverSecure.on('error', onError);
+serverSecure.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -82,7 +94,7 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
+  var addr = serverSecure.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;

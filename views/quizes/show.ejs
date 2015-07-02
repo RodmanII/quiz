@@ -4,3 +4,19 @@
   <input type="text" name="respuesta" placeholder="Respuesta" required/>
   <input type="submit" name="Enviar"/>
 </form>
+
+<p><a href='/quizes/<%= quiz.id %>/comments/new'><button>Nuevo comentario</button></a></p>
+
+<p><strong>Comentarios</strong></p>
+<ol>
+  <% for(index in quiz.Comments) {%>
+      <% if(quiz.Comments[index].publicado || session.user) { %>
+        <li><%= quiz.Comments[index].texto %>
+        <% if(!quiz.Comments[index].publicado && session.user) { %>
+          <a href="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>/publish">
+            <button>Publicar</button></a>
+        <% } %>
+        </li>
+      <% } %>
+  <% } %>
+</ol>
